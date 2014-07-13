@@ -3,7 +3,7 @@
 source librest.sh
 
 VERSION="{\"description\": null, \"name\": \"%s\", \"archived\": false, \"released\": false, \"releaseDate\": null, \"userReleaseDate\": null, \"project\": \"${JIRA_KEY}\"}"
-COMPONENT='{"name": "%s", "description": "%s", "leadUserName": "agmconejo", "assigneeType": "COMPONENT_LEAD", "isAssigneeTypeValid": false, "project": "MFTPD"}'
+COMPONENT='{"name": "%s", "description": "%s", "leadUserName": "${USERNAME}", "assigneeType": "COMPONENT_LEAD", "isAssigneeTypeValid": false, "project": "${JIRA_KEY}"}'
 
 # $1 name
 # $2 description
