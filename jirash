@@ -1,0 +1,44 @@
+#!/bin/bash
+
+source libjira.sh
+
+function hello() {
+	echo "jiracmd 0.1"
+}
+
+function prompt() {
+	echo -n "jira # "
+}
+
+function print_help() {
+	echo -e "Available commands:"
+	echo -e "\tlist_versions"
+	echo -e "\tlist_components"
+	echo -e "\tcreate_version <name>"
+	echo -e "\tdelete_version <name>"
+	echo -e "\tcreate_component <name> <description>"
+	echo -e "\tdelete_component <name>"
+	echo -e "\tget_issue <name>"
+	echo -e "\tlist_status <name>"
+}
+
+function bye() {
+	echo -n "jira # "
+}
+
+hello && prompt
+
+while read LINE ; do
+	case "${LINE}" in
+		"help")
+			print_help
+		;;
+		"quit")
+			bye && exit 0
+		;;
+		*)
+			eval "${LINE}"
+		;;
+	esac
+	prompt
+done
