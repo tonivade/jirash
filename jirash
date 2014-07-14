@@ -20,6 +20,7 @@ function print_help() {
 	echo -e "\tdelete_component <name>"
 	echo -e "\tget_issue <name>"
 	echo -e "\tlist_status <name>"
+	echo -e "\tsearch <jpl>"
 }
 
 function bye() {

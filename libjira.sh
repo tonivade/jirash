@@ -3,7 +3,8 @@
 source librest.sh
 
 VERSION="{\"description\": null, \"name\": \"%s\", \"archived\": false, \"released\": false, \"releaseDate\": null, \"userReleaseDate\": null, \"project\": \"${JIRA_KEY}\"}"
-COMPONENT='{"name": "%s", "description": "%s", "leadUserName": "${USERNAME}", "assigneeType": "COMPONENT_LEAD", "isAssigneeTypeValid": false, "project": "${JIRA_KEY}"}'
+COMPONENT="{\"name\": \"%s\", \"description\": \"%s\", \"leadUserName\": \"${USERNAME}\", \"assigneeType\": \"COMPONENT_LEAD\", \"isAssigneeTypeValid\": false, \"project\": \"${JIRA_KEY}\"}"
+SEARCH="{\"jql\": \"%s\",\"startAt\": 0,\"maxResults\": 15,\"fields\": [\"summary\",\"status\",\"assignee\"]}"
 
 # $1 name
 # $2 description
@@ -41,4 +42,9 @@ function get_issue() {
 
 function lists_status() {
 	do_get "status"
+}
+
+# $1 jql
+function search() {
+	do_post "search" "`json_tmpl "${SEARCH}" "project = ${JIRA_KEY} AND ${1}"`"
 }
