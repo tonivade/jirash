@@ -23,8 +23,8 @@ jirash [-h] [-i] <command> <arg1> <arg2> ... <argN>
 
 ## Options
 
-* -h	display help
-* -i	interactive mode	
+* -h    display help
+* -i    interactive mode
 
 ## Available commands
 
@@ -36,7 +36,7 @@ jirash [-h] [-i] <command> <arg1> <arg2> ... <argN>
 * delete_component <name>
 * get_issue <key>
 * list_status <name>
-* issue_transitions <key>
+* list_transitions <key>
 
 ## Dependencies
 

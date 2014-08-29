@@ -11,6 +11,15 @@ function prompt() {
 }
 
 function print_help() {
+	echo -e "jirash [-h] [-i] <command> <param1> <param2>"
+	echo
+	echo -e "\t-h prints help"
+	echo -e "\t-h interactive shell"
+	echo
+	print_commands
+}
+
+function print_commands() {
 	echo -e "Available commands:"
 	echo -e "\tlist_versions"
 	echo -e "\tlist_components"
@@ -28,6 +37,53 @@ function bye() {
 	echo -n "bye!"
 }
 
+# $1 command
+function unknown() {
+	echo "unknown command $1"
+}
+
+# $1 command
+function execute() {
+	case "$1" in
+		"list_versions")
+			list_versions "${@: 2}"
+		;;
+		"list_components")
+			list_components "${@: 2}"
+		;;
+		"create_version")
+			create_version "${@: 2}"
+		;;
+		"delete_version")
+			delete_version "${@: 2}"
+		;;
+		"create_component")
+			create_component "${@: 2}"
+		;;
+		"delete_component")
+			delete_component "${@: 2}"
+		;;
+		"delete_component")
+			delete_component "${@: 2}"
+		;;
+		"list_status")
+			list_status "${@: 2}"
+		;;
+		"get_issue")
+			get_issue "${@: 2}"
+		;;
+		"search")
+			search "${@: 2}"
+		;;
+		"list_transitions")
+			list_transitions "${@: 2}"
+		;;
+		*)
+			unknown $1
+		;;
+	esac
+}
+
 if [ "$1" = "-i" ] ; then
 	# interactive shell
 	
@@ -36,18 +92,20 @@ if [ "$1" = "-i" ] ; then
 	while read LINE ; do
 		case "${LINE}" in
 			"help")
-				print_help
+				print_commands
 			;;
 			"quit")
 				bye && exit 0
 			;;
 			*)
-				eval "${LINE}"
+				execute "${LINE}"
 			;;
 		esac
 		prompt
 	done
+elif [ "$1" = "-h" ] ; then
+	print_help
 else
 	# non interactive
-	eval $*
+	execute "$@"
 fi
