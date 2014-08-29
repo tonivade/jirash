@@ -3,10 +3,10 @@ jirash
 
 Shell access to JIRA using the REST API
 
+## Configuration
 
-Configuration
 
-```
+```bash
    JIRA_KEY=PROJECT
    JIRA_URL="https://localhost:8080/jira/rest/api/latest"
    CURL_OPTS="-k -s"
@@ -15,7 +15,18 @@ Configuration
    PASSWORD=password
 ```
 
-Available commands
+## Command Line
+
+```bash
+jirash [-h] [-i] <command> <arg1> <arg2> ... <argN>
+```
+
+## Options
+
+* -h	display help
+* -i	interactive mode	
+
+## Available commands
 
 * list_versions
 * list_components
@@ -23,6 +34,11 @@ Available commands
 * delete_version <name>
 * create_component <name> <description>
 * delete_component <name>
-* get_issue <name>
+* get_issue <key>
 * list_status <name>
+* issue_transitions <key>
 
+## Dependencies
+
+* curl (http://curl.haxx.se/)
+* jq (http://stedolan.github.io/jq/)

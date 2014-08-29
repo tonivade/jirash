@@ -28,11 +28,11 @@ function delete_version() {
 }
 
 function list_versions() {
-	do_get "project/${JIRA_KEY}/versions"
+	do_get "project/${JIRA_KEY}/versions" | jq "[ .[] | { id: .id, name: .name } ]"
 }
 
 function list_components() {
-	do_get "project/${JIRA_KEY}/components"
+	do_get "project/${JIRA_KEY}/components" | jq "[ .[] | { id: .id, name: .name } ]"
 }
 
 # $1 name
@@ -47,4 +47,9 @@ function lists_status() {
 # $1 jql
 function search() {
 	do_post "search" "`json_tmpl "${SEARCH}" "project = ${JIRA_KEY} AND ${1}"`"
+}
+
+# $1 issue
+function list_transitions() {
+	do_get "issue/${1}/transitions"
 }

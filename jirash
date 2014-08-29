@@ -18,28 +18,36 @@ function print_help() {
 	echo -e "\tdelete_version <name>"
 	echo -e "\tcreate_component <name> <description>"
 	echo -e "\tdelete_component <name>"
-	echo -e "\tget_issue <name>"
+	echo -e "\tget_issue <key>"
 	echo -e "\tlist_status <name>"
-	echo -e "\tsearch <jpl>"
+	echo -e "\tsearch <jql>"
+	echo -e "\tlist_transitions <key>"
 }
 
 function bye() {
-	echo -n "jira # "
+	echo -n "bye!"
 }
 
-hello && prompt
+if [ "$1" = "-i" ] ; then
+	# interactive shell
+	
+	hello && prompt
 
-while read LINE ; do
-	case "${LINE}" in
-		"help")
-			print_help
-		;;
-		"quit")
-			bye && exit 0
-		;;
-		*)
-			eval "${LINE}"
-		;;
-	esac
-	prompt
-done
+	while read LINE ; do
+		case "${LINE}" in
+			"help")
+				print_help
+			;;
+			"quit")
+				bye && exit 0
+			;;
+			*)
+				eval "${LINE}"
+			;;
+		esac
+		prompt
+	done
+else
+	# non interactive
+	eval $*
+fi
